@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniPDF Offline - 28 Alat PDF Lengkap (iLovePDF Complete Suite)</title>
+  <style>
+    :root {
+      --primary: #E5322D;
+      --primary-hover: #C5221F;
+      --primary-light: #FEECEB;
+      --dark: #1A1A1A;
+      --gray-bg: #F4F5F7;
+      --gray-border: #E0E2E6;
+      --gray-text: #666666;
+      --white: #FFFFFF;
+      --radius: 12px;
+      --shadow: 0 4px 14px rgba(0,0,0,0.06);
+      --shadow-hover: 0 10px 25px rgba(229,50,45,0.15);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--gray-bg); color: var(--dark); line-height: 1.5; padding-bottom: 60px; }
+
+    /* Top Navigation */
+    header { background: var(--white); border-bottom: 1px solid var(--gray-border); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+    .nav-container { max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; }
+    .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--dark); }
+    .brand-logo { background: var(--primary); color: var(--white); font-weight: 900; font-size: 20px; padding: 6px 12px; border-radius: 8px; letter-spacing: -0.5px; }
+    .brand-title { font-size: 19px; font-weight: 800; }
+    .brand-title span { color: var(--primary); }
+    .badge-offline { background: #E8F5E9; color: #2E7D32; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 20px; border: 1px solid #C8E6C9; }
+
+    /* Hero Banner */
+    .hero { text-align: center; padding: 35px 20px 20px; max-width: 850px; margin: 0 auto; }
+    .hero h1 { font-size: 32px; font-weight: 900; color: #111; margin-bottom: 8px; }
+    .hero p { font-size: 15px; color: var(--gray-text); line-height: 1.6; }
+
+    /* Categories Tab */
+    .categories { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 15px auto 30px; max-width: 1050px; padding: 0 15px; }
+    .cat-btn { background: var(--white); border: 1px solid var(--gray-border); padding: 8px 16px; border-radius: 30px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; color: #444; }
+    .cat-btn:hover, .cat-btn.active { background: var(--primary); color: var(--white); border-color: var(--primary); }
+
+    /* Search Bar */
+    .search-box { max-width: 450px; margin: 0 auto 30px; padding: 0 20px; }
+    .search-input { width: 100%; padding: 10px 16px; border-radius: 30px; border: 1px solid var(--gray-border); font-size: 14px; outline: none; background: #FFF; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
+    .search-input:focus { border-color: var(--primary); }
+
+    /* Tools Grid */
+    .tools-container { max-width: 1240px; margin: 0 auto; padding: 0 20px; display: grid; grid-template-columns: repeat(auto-fill, minmax(265px, 1fr)); gap: 18px; }
+    .tool-card { background: var(--white); border-radius: var(--radius); padding: 22px 18px; border: 1px solid var(--gray-border); box-shadow: var(--shadow); cursor: pointer; transition: all 0.25s ease; display: flex; flex-direction: column; align-items: flex-start; position: relative; overflow: hidden; }
+    .tool-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); border-color: var(--primary); }
+    .tool-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: transparent; transition: background 0.2s; }
+    .tool-card:hover::before { background: var(--primary); }
+    .tool-icon { font-size: 32px; margin-bottom: 12px; background: var(--primary-light); width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .tool-title { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 5px; }
+    .tool-desc { font-size: 13px; color: var(--gray-text); line-height: 1.4; }
+    .tool-badge { position: absolute; top: 12px; right: 12px; font-size: 10px; font-weight: 800; padding: 2px 7px; border-radius: 6px; background: #FFF3E0; color: #E65100; text-transform: uppercase; }
+    .tool-badge.new { background: #E0F2FE; color: #0284C7; }
+
+    /* Modal Dialog */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 1000; padding: 20px; }
+    .modal-overlay.active { display: flex; }
+    .modal-window { background: var(--white); width: 100%; max-width: 680px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); max-height: 92vh; display: flex; flex-direction: column; overflow: hidden; animation: popIn 0.2s ease; }
+    @keyframes popIn { from { transform: scale(0.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    .modal-header { padding: 16px 22px; border-bottom: 1px solid var(--gray-border); display: flex; justify-content: space-between; align-items: center; background: #FAFAFA; }
+    .modal-title-box { display: flex; align-items: center; gap: 10px; }
+    .modal-title-icon { font-size: 24px; }
+    .modal-title { font-size: 18px; font-weight: 800; color: var(--dark); }
+    .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: #888; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+    .close-btn:hover { background: #EEE; color: #000; }
+
+    .modal-body { padding: 22px; overflow-y: auto; flex: 1; }
+
+    /* Upload Dropzone */
+    .dropzone { border: 2px dashed #CBD5E1; border-radius: 12px; padding: 32px 20px; text-align: center; cursor: pointer; transition: all 0.2s; background: #F8FAFC; }
+    .dropzone:hover, .dropzone.dragover { border-color: var(--primary); background: var(--primary-light); }
+    .dropzone-icon { font-size: 40px; color: var(--primary); margin-bottom: 6px; }
+    .dropzone-text { font-size: 15px; font-weight: 700; color: #334155; margin-bottom: 3px; }
+    .dropzone-sub { font-size: 12px; color: #64748B; }
+
+    /* File List with Reorder */
+    .file-list { margin-top: 14px; display: flex; flex-direction: column; gap: 6px; max-height: 200px; overflow-y: auto; padding-right: 4px; }
+    .file-item { display: flex; align-items: center; justify-content: space-between; background: #F8FAFC; border: 1px solid var(--gray-border); padding: 8px 12px; border-radius: 8px; font-size: 13px; }
+    .file-item-name { font-weight: 600; color: #1E293B; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 340px; }
+    .file-item-actions { display: flex; gap: 4px; }
+    .item-btn { background: #FFF; border: 1px solid #CBD5E1; border-radius: 4px; padding: 3px 8px; cursor: pointer; font-size: 11px; font-weight: 600; }
+    .item-btn:hover { background: #E2E8F0; }
+    .item-btn.btn-del { color: #DC2626; border-color: #FCA5A5; }
+    .item-btn.btn-del:hover { background: #FEE2E2; }
+
+    /* Options Box */
+    .options-box { margin-top: 18px; padding: 14px; background: #F8FAFC; border-radius: 10px; border: 1px solid #E2E8F0; }
+    .options-title { font-size: 12px; font-weight: 800; color: #334155; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-group { margin-bottom: 12px; }
+    .form-group:last-child { margin-bottom: 0; }
+    .form-label { display: block; font-size: 13px; font-weight: 700; color: #475569; margin-bottom: 4px; }
+    .form-control { width: 100%; padding: 8px 12px; border-radius: 6px; border: 1px solid #CBD5E1; font-size: 13px; outline: none; background: #FFF; }
+    .form-control:focus { border-color: var(--primary); }
+    .radio-group { display: flex; flex-wrap: wrap; gap: 12px; }
+    .radio-label { display: flex; align-items: center; gap: 6px; font-size: 13px; cursor: pointer; }
+
+    /* Signature Canvas */
+    .sig-canvas-box { border: 1px solid #CBD5E1; border-radius: 8px; background: #FFF; margin-top: 6px; position: relative; }
+    canvas#sigCanvas { width: 100%; height: 130px; display: block; cursor: crosshair; }
+    .sig-clear-btn { position: absolute; bottom: 6px; right: 6px; background: #F1F5F9; border: 1px solid #CBD5E1; padding: 3px 8px; font-size: 11px; border-radius: 4px; cursor: pointer; }
+
+    /* Modal Footer */
+    .modal-footer { padding: 14px 22px; border-top: 1px solid var(--gray-border); background: #FAFAFA; display: flex; justify-content: flex-end; gap: 10px; }
+    .btn { padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s; }
+    .btn-secondary { background: #E2E8F0; color: #334155; }
+    .btn-secondary:hover { background: #CBD5E1; }
+    .btn-primary { background: var(--primary); color: var(--white); display: flex; align-items: center; gap: 8px; }
+    .btn-primary:hover { background: var(--primary-hover); box-shadow: 0 4px 12px rgba(229,50,45,0.3); }
+    .btn-primary:disabled { background: #94A3B8; cursor: not-allowed; }
+
+    /* Result State */
+    .result-box { text-align: center; padding: 25px 15px; display: none; }
+    .result-icon { font-size: 50px; margin-bottom: 10px; color: #16A34A; }
+    .result-title { font-size: 20px; font-weight: 800; color: #111; margin-bottom: 5px; }
+    .result-detail { font-size: 14px; color: #475569; margin-bottom: 20px; }
+    .btn-download { background: #16A34A; color: #FFF; padding: 12px 26px; font-size: 15px; font-weight: 800; border-radius: 30px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 6px 18px rgba(22,163,74,0.3); transition: all 0.2s; }
+    .btn-download:hover { background: #15803D; transform: translateY(-2px); }
+
+    /* Progress Loader */
+    .loader-box { text-align: center; padding: 30px 15px; display: none; }
+    .spinner { border: 4px solid #E2E8F0; border-top: 4px solid var(--primary); border-radius: 50%; width: 44px; height: 44px; animation: spin 0.8s linear infinite; margin: 0 auto 16px; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="/" class="brand">
+        <div class="brand-logo">PDF</div>
+        <div class="brand-title">Omni<span>PDF</span></div>
+        <span class="badge-offline">⚡ 100% OFFLINE</span>
+      </a>
+      <div style="font-size: 13px; color: #666; font-weight: 600;">
+        28 Alat Lengkap • Privasi Penuh • Tanpa Batas Ukuran
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Semua Alat PDF yang Ada di iLovePDF, 100% Offline</h1>
+    <p>Suite lengkap: konversi timbal-balik PDF, Word, Excel, PowerPoint, gambar JPG berurutan, tanda tangan e-Sign, sensor redaction rahasia, potong crop, putar, kompresi, hingga pemulihan PDF tanpa perlu internet.</p>
+  </section>
+
+  <!-- Search Filter -->
+  <div class="search-box">
+    <input type="text" class="search-input" placeholder="🔍 Cari alat PDF (misal: 'tanda tangan', 'word', 'kompres', 'sensor')..." onkeyup="searchTools(this.value)">
+  </div>
+
+  <!-- Categories Filter -->
+  <div class="categories">
+    <button class="cat-btn active" onclick="filterCategory('all', this)">Semua Alat (28)</button>
+    <button class="cat-btn" onclick="filterCategory('organize', this)">Organisir PDF</button>
+    <button class="cat-btn" onclick="filterCategory('optimize', this)">Optimasi & Edit</button>
+    <button class="cat-btn" onclick="filterCategory('to-pdf', this)">Konversi ke PDF</button>
+    <button class="cat-btn" onclick="filterCategory('from-pdf', this)">Konversi dari PDF</button>
+    <button class="cat-btn" onclick="filterCategory('security', this)">Keamanan & Tanda Tangan</button>
+  </div>
+
+  <!-- Tools Grid (28 Tools) -->
+  <div class="tools-container" id="toolsGrid">
+
+    <!-- 1. JPG to PDF -->
+    <div class="tool-card" data-cat="to-pdf" onclick="openTool('img2pdf')">
+      <div class="tool-badge">FAVORIT</div>
+      <div class="tool-icon">🖼️</div>
+      <div class="tool-title">Gambar ke PDF</div>
+      <div class="tool-desc">Gabungkan banyak foto JPG, PNG, atau WEBP menjadi satu PDF rapi berurutan.</div>
+    </div>
+
+    <!-- 2. Merge PDF -->
+    <div class="tool-card" data-cat="organize" onclick="openTool('merge')">
+      <div class="tool-icon">📑</div>
+      <div class="tool-title">Gabungkan PDF</div>
+      <div class="tool-desc">Satukan beberapa dokumen PDF menjadi satu file dalam urutan yang Anda inginkan.</div>
+    </div>
+
+    <!-- 3. Split PDF -->
+    <div class="tool-card" data-cat="organize" onclick="openTool('split')">
+      <div class="tool-icon">✂️</div>
+      <div class="tool-title">Pisahkan PDF</div>
+      <div class="tool-desc">Ambil rentang halaman tertentu atau pecah setiap halaman menjadi file terpisah.</div>
+    </div>
+
+    <!-- 4. Compress PDF -->
+    <div class="tool-card" data-cat="optimize" onclick="openTool('compress')">
+      <div class="tool-icon">🗜️</div>
+      <div class="tool-title">Kompres PDF</div>
+      <div class="tool-desc">Kecilkan ukuran file PDF secara signifikan tanpa mengurangi keterbacaan teks.</div>
+    </div>
+
+    <!-- 5. Sign PDF (NEW!) -->
+    <div class="tool-card" data-cat="security" onclick="openTool('sign')">
+      <div class="tool-badge new">BARU</div>
+      <div class="tool-icon">✍️</div>
+      <div class="tool-title">Tanda Tangan PDF</div>
+      <div class="tool-desc">Gambar tanda tangan Anda langsung atau unggah cap tanda tangan ke posisi dokumen.</div>
+    </div>
+
+    <!-- 6. PDF to Word -->
+    <div class="tool-card" data-cat="from-pdf" onclick="openTool('pdf2word')">
+      <div class="tool-icon">📝</div>
+      <div class="tool-title">PDF ke Word</div>
+      <div class="tool-desc">Konversi file PDF menjadi dokumen Microsoft Word (.docx) yang dapat diedit langsung.</div>
+    </div>
+
+    <!-- 7. Word to PDF -->
+    <div class="tool-card" data-cat="to-pdf" onclick="openTool('word2pdf')">
+      <div class="tool-icon">📄</div>
+      <div class="tool-title">Word ke PDF</div>
+      <div class="tool-desc">Ubah dokumen DOCX menjadi format PDF dengan tata letak paragraf rapi.</div>
+    </div>
+
+    <!-- 8. PowerPoint to PDF (NEW!) -->
+    <div class="tool-card" data-cat="to-pdf" onclick="openTool('powerpoint2pdf')">
+      <div class="tool-badge new">BARU</div>
+      <div class="tool-icon">📊</div>
+      <div class="tool-title">PowerPoint ke PDF</div>
+      <div class="tool-desc">Ubah presentasi PPTX menjadi dokumen PDF beresolusi tinggi dengan slide teratur.</div>
+    </div>
+
+    <!-- 9. PDF to PowerPoint -->
+    <div class="tool-card" data-cat="from-pdf" onclick="openTool('pdf2pptx')">
+      <div class="tool-icon">📽️</div>
+      <div class="tool-title">PDF ke PowerPoint</div>
+      <div class="tool-desc">Ubah tiap halaman PDF menjadi slide presentasi PPTX widescreen tajam.</div>
+    </div>
+
+    <!-- 10. Excel to PDF -->
+    <div class="tool-card" data-cat="to-pdf" onclick="openTool('excel2pdf')">
+      <div class="tool-icon">📈</div>
+      <div class="tool-title">Excel ke PDF</div>
+      <div class="tool-desc">Cetak tabel spreadsheet Excel (.xlsx) menjadi dokumen PDF siap cetak.</div>
+    </div>
+
+    <!-- 11. PDF to Excel -->
+    <div class="tool-card" data-cat="from-pdf" onclick="openTool('pdf2excel')">
+      <div class="tool-icon">📑</div>
+      <div class="tool-title">PDF ke Excel</div>
+      <div class="tool-desc">Ekstrak tabel data dari PDF secara cerdas langsung ke lembar kerja Excel (.xlsx).</div>
+    </div>
+
+    <!-- 12. PDF to Images -->
+    <div class="tool-card" data-cat="from-pdf" onclick="openTool('pdf2img')">
+      <div class="tool-icon">📸</div>
+      <div class="tool-title">PDF ke Gambar</div>
+      <div class="tool-desc">Ubah setiap halaman dokumen PDF menjadi gambar PNG, JPG, atau WEBP dalam ZIP.</div>
+    </div>
+
+    <!-- 13. Extract Embedded Images (NEW!) -->
+    <div class="tool-card" data-cat="from-pdf" onclick="openTool('extract_images')">
+      <div class="tool-badge new">BARU</div>
+      <div class="tool-icon">🎨</div>
+      <div class="tool-title">Ekstrak Gambar Asli</div>
+      <div class="tool-desc">Ambil seluruh foto murni yang tertanam di dalam PDF dengan resolusi asli ke ZIP.</div>
+    </div>
+
+    <!-- 14. Redact PDF / Sensor (NEW!) -->
+    <div class="tool-card" data-cat="optimize" onclick="openTool('redact')">
+      <div class="tool-badge new">BARU</div>
+      <div class="tool-icon">⬛</div>
+      <div class="tool-title">Sensor PDF (Redact)</div>
+      <div class="tool-desc">Hapus dan sensor teks rahasia (NIK, No. HP, Nama) secara permanen dari dokumen.</div>
+    </div>
+
+    <!-- 15. Crop PDF (NEW!) -->
+    <div class="tool-card" data-cat="optimize" onclick="openTool('crop')">
+      <div class="tool-badge new">BARU</div>
+      <div class="tool-icon">📐</div>
+      <div class="tool-title">Potong Halaman (Crop)</div>
+      <div class="tool-desc">Pangkas margin tepi putih yang berlebihan pada seluruh halaman PDF Anda.</div>
+    </div>
+
+    <!-- 16. Edit PDF (NEW!) -->
+    <div class="tool-card" data-cat="optimize" onclick="openTool('edit')">
+      <div class="tool-badge new">BARU</div>
+      <div class="tool-icon">✏️</div>
+      <div class="tool-title">Edit / Tambah Teks</div>
+      <div class="tool-desc">Bubuhkan teks baru, keterangan, catatan, atau tanggal pada halaman PDF.</div>
+    </div>
+
+    <!-- 17. Organize Pages (NEW!) -->
+    <div class="tool-card" data-cat="organize" onclick="openTool('organize')">
+      <div class="tool-badge new">BARU</div>
+      <div class="tool-icon">🔀</div>
+      <div class="tool-title">Urutkan Halaman</div>
+      <div class="tool-desc">Atur ulang urutan halaman dokumen PDF Anda sesuai keinginan (misal: 3, 1, 2).</div>
+    </div>
+
+    <!-- 18. Rotate PDF -->
+    <div class="tool-card" data-cat="organize" onclick="openTool('rotate')">
+      <div class="tool-icon">🔄</div>
+      <div class="tool-title">Putar PDF</div>
+      <div class="tool-desc">Putar orientasi halaman dokumen Anda 90°, 180°, atau 270° secara mudah.</div>
+    </div>
+
+    <!-- 19. Remove Pages -->
+    <div class="tool-card" data-cat="organize" onclick="openTool('remove_pages')">
+      <div class="tool-icon">🗑️</div>
+      <div class="tool-title">Hapus Halaman</div>
+      <div class="tool-desc">Pilih dan buang nomor halaman yang tidak diinginkan dari dalam dokumen PDF.</div>
+    </div>
+
+    <!-- 20. Watermark -->
+    <div class="tool-card" data-cat="optimize" onclick="openTool('watermark')">
+      <div class="tool-icon">💧</div>
+      <div class="tool-title">Tambah Watermark</div>
+      <div class="tool-desc">Sematkan cap air teks seperti 'RAHASIA' transparan diagonal pada setiap halaman.</div>
+    </div>
+
+    <!-- 21. Page Numbers -->
+    <div class="tool-card" data-cat="optimize" onclick="openTool('page_numbers')">
+      <div class="tool-icon">🔢</div>
+      <div class="tool-title">Nomor Halaman</div>
+      <div class="tool-desc">Bubuhi nomor halaman otomatis di bagian bawah tengah atau pojok dokumen.</div>
+    </div>
+
+    <!-- 22. Protect PDF -->
+    <div class="tool-card" data-cat="security" onclick="openTool('protect')">
+      <div class="tool-icon">🔒</div>
+      <div class="tool-title">Kunci PDF (Password)</div>
+      <div class="tool-desc">Lindungi dokumen penting Anda dengan enkripsi kata sandi kuat AES-256.</div>
+    </div>
+
+    <!-- 23. Unlock PDF -->
+    <div class="tool-card" data-cat="security" onclick="openTool('unlock')">
+      <div class="tool-icon">🔓</div>
+      <div class="tool-title">Buka Kunci PDF</div>
+      <div class="tool-desc">Hilangkan proteksi password dari PDF agar dapat dibuka bebas tanpa password.</div>
+    </div>
+
+    <!-- 24. Compare PDF (NEW!) -->
+    <div class="tool-card" data-cat="security" onclick="openTool('compare')">
+      <div class="tool-badge new">BARU</div>
+      <div class="tool-icon">🔍</div>
+      <div class="tool-title">Bandingkan 2 PDF</div>
+      <div class="tool-desc">Bandingkan dua dokumen PDF dan dapatkan laporan perubahan teks antar versi.</div>
+    </div>
+
+    <!-- 25. HTML to PDF (NEW!) -->
+    <div class="tool-card" data-cat="to-pdf" onclick="openTool('html2pdf')">
+      <div class="tool-badge new">BARU</div>
+      <div class="tool-icon">🌐</div>
+      <div class="tool-title">HTML ke PDF</div>
+      <div class="tool-desc">Ubah file dokumen HTML atau kode markup web menjadi dokumen PDF rapi.</div>
+    </div>
+
+    <!-- 26. PDF to PDF/A (NEW!) -->
+    <div class="tool-card" data-cat="from-pdf" onclick="openTool('pdf2pdfa')">
+      <div class="tool-badge new">BARU</div>
+      <div class="tool-icon">🏛️</div>
+      <div class="tool-title">PDF ke PDF/A</div>
+      <div class="tool-desc">Konversi file PDF ke standar arsip internasional ISO PDF/A untuk penyimpanan jangka panjang.</div>
+    </div>
+
+    <!-- 27. Extract Text (TXT) -->
+    <div class="tool-card" data-cat="from-pdf" onclick="openTool('pdf2text')">
+      <div class="tool-icon">📋</div>
+      <div class="tool-title">Ekstrak Teks (TXT)</div>
+      <div class="tool-desc">Salin dan simpan seluruh isi teks di dalam PDF menjadi file teks polos .txt.</div>
+    </div>
+
+    <!-- 28. Repair PDF -->
+    <div class="tool-card" data-cat="optimize" onclick="openTool('repair')">
+      <div class="tool-icon">🛠️</div>
+      <div class="tool-title">Perbaiki PDF</div>
+      <div class="tool-desc">Pulihkan file PDF yang korup, rusak, atau sulit dibuka dengan MuPDF recovery.</div>
+    </div>
+
+  </div>
+
+  <!-- Dynamic Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div class="modal-title-box">
+          <span class="modal-title-icon" id="mIcon">📄</span>
+          <span class="modal-title" id="mTitle">Judul Alat</span>
+        </div>
+        <button class="close-btn" onclick="closeModal()">×</button>
+      </div>
+
+      <div class="modal-body">
+        <div id="stepUpload">
+          <div class="dropzone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+            <div class="dropzone-icon">📁</div>
+            <div class="dropzone-text" id="dropText">Klik atau Seret File ke Sini</div>
+            <div class="dropzone-sub" id="dropSub">Mendukung file langsung dari komputer Anda</div>
+            <input type="file" id="fileInput" style="display: none;" onchange="handleFileSelect(this.files)">
+          </div>
+
+          <div class="file-list" id="fileListBox" style="display: none;"></div>
+
+          <div class="options-box" id="optionsBox" style="display: none;">
+            <div class="options-title">Pengaturan Alat</div>
+            <div id="dynamicOptions"></div>
+          </div>
+        </div>
+
+        <div class="loader-box" id="stepLoading">
+          <div class="spinner"></div>
+          <div style="font-weight: 700; font-size: 16px; margin-bottom: 6px;">Sedang Memproses Dokumen...</div>
+          <div style="font-size: 13px; color: #64748B;">Mohon tunggu, proses dilakukan 100% lokal di komputer Anda.</div>
+        </div>
+
+        <div class="result-box" id="stepResult">
+          <div class="result-icon">✅</div>
+          <div class="result-title" id="resTitle">Berhasil Diproses!</div>
+          <div class="result-detail" id="resDetail">File Anda sudah siap untuk diunduh.</div>
+          <a href="#" class="btn-download" id="resBtnDownload">
+            <span>📥 Unduh File Sekarang</span>
+          </a>
+          <div style="margin-top: 18px;">
+            <button class="btn btn-secondary" onclick="resetModal()">Konversi File Lain</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" id="modalFooter">
+        <button class="btn btn-secondary" onclick="closeModal()">Batal</button>
+        <button class="btn btn-primary" id="btnProcess" onclick="submitProcess()" disabled>
+          <span>Mulai Proses</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const TOOLS_CONFIG = {
+      img2pdf: {
+        title: "Gambar ke PDF",
+        icon: "🖼️",
+        multiple: true,
+        accept: "image/*,.jpg,.jpeg,.png,.webp,.bmp,.tiff",
+        dropText: "Pilih atau Seret Foto / Gambar ke Sini",
+        dropSub: "Dapat memilih banyak gambar sekaligus. Urutan dapat digeser naik/turun.",
+        optionsHtml: `
+          <div class="form-group">
+            <label class="form-label">Ukuran Halaman:</label>
+            <select class="form-control" id="opt_page_size">
+              <option value="A4" selected>A4 (Standar Dokumen)</option>
+              <option value="Original">Original (Sesuai Ukuran Asli Foto)</option>
+              <option value="Letter">Letter</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Margin Tepi:</label>
+            <select class="form-control" id="opt_margin">
+              <option value="0">Tanpa Margin (Foto Penuh / Borderless)</option>
+              <option value="10">Margin Kecil (10pt)</option>
+              <option value="20" selected>Margin Normal (20pt)</option>
+              <option value="40">Margin Lebar (40pt)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="radio-label">
+              <input type="checkbox" id="opt_autorotate" checked> Otomatis Sesuaikan Orientasi (Landscape jika foto mendatar)
+            </label>
+          </div>
+        `
+      },
+      merge: {
+        title: "Gabungkan Beberapa PDF",
+        icon: "📑",
+        multiple: true,
+        accept: ".pdf",
+        dropText: "Pilih File PDF yang Ingin Digabung",
+        dropSub: "Pilih 2 atau lebih file PDF. Urutan bisa diatur dengan tombol panah.",
+        optionsHtml: `<div style="font-size:12px; color:#64748B;">File PDF akan digabungkan dari atas ke bawah sesuai urutan di daftar.</div>`
+      },
+      split: {
+        title: "Pisahkan Halaman PDF",
+        icon: "✂️",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF",
+        optionsHtml: `
+          <div class="form-group">
+            <label class="form-label">Metode Pemisahan:</label>
+            <select class="form-control" id="opt_split_mode" onchange="document.getElementById('split_range_box').style.display = (this.value==='ranges'?'block':'none')">
+              <option value="ranges">Ekstrak Halaman Tertentu</option>
+              <option value="each_page">Pecah Setiap Halaman (Hasil ZIP)</option>
+            </select>
+          </div>
+          <div class="form-group" id="split_range_box">
+            <label class="form-label">Rentang Halaman (Contoh: '1-3, 5, 8'):</label>
+            <input type="text" class="form-control" id="opt_split_ranges" value="1-3">
+          </div>
+        `
+      },
+      sign: {
+        title: "Tanda Tangan PDF (e-Signature)",
+        icon: "✍️",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF yang Ingin Ditandatangani",
+        optionsHtml: `
+          <div class="form-group">
+            <label class="form-label">Gambar Tanda Tangan Anda di Kotak Berikut:</label>
+            <div class="sig-canvas-box">
+              <canvas id="sigCanvas"></canvas>
+              <button type="button" class="sig-clear-btn" onclick="clearSignatureCanvas()">Hapus Tanda Tangan</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nama Penanda Tangan (Opsional):</label>
+            <input type="text" class="form-control" id="opt_sig_name" placeholder="Misal: John Doe">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Halaman Target:</label>
+            <input type="number" class="form-control" id="opt_sig_page" value="1" min="1">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Posisi Tanda Tangan:</label>
+            <select class="form-control" id="opt_sig_pos">
+              <option value="bottom-right" selected>Pojok Bawah Kanan</option>
+              <option value="bottom-left">Pojok Bawah Kiri</option>
+              <option value="center">Tengah Halaman</option>
+            </select>
+          </div>
+        `
+      },
+      compress: {
+        title: "Kompresi Ukuran PDF",
+        icon: "🗜️",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF untuk Dikompres",
+        optionsHtml: `
+          <div class="form-group">
+            <label class="form-label">Tingkat Kompresi:</label>
+            <div class="radio-group">
+              <label class="radio-label"><input type="radio" name="comp_lvl" value="extreme"> Ekstrem (Kecil maksimal)</label>
+              <label class="radio-label"><input type="radio" name="comp_lvl" value="recommended" checked> Direkomendasikan (Seimbang)</label>
+              <label class="radio-label"><input type="radio" name="comp_lvl" value="low"> Ringan (Kualitas tinggi)</label>
+            </div>
+          </div>
+        `
+      },
+      redact: {
+        title: "Sensor PDF (Redact Sensitive Data)",
+        icon: "⬛",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF yang Ingin Disensor",
+        optionsHtml: `
+          <div class="form-group">
+            <label class="form-label">Kata Kunci / Frasa yang Ingin Disensor (Pisahkan dengan koma):</label>
+            <input type="text" class="form-control" id="opt_redact_kws" placeholder="Contoh: 320123456789, 08123456789, Rahasia">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Label Penutup Kotak Sensor:</label>
+            <input type="text" class="form-control" id="opt_redact_label" value="[DISENSOR]">
+          </div>
+        `
+      },
+      crop: {
+        title: "Potong Halaman PDF (Crop Margin)",
+        icon: "📐",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF yang Ingin Dipangkas",
+        optionsHtml: `
+          <div class="form-group">
+            <label class="form-label">Besar Pemangkasan Tepi (Point):</label>
+            <select class="form-control" id="opt_crop_margin">
+              <option value="20">Kecil (20 pt)</option>
+              <option value="36" selected>Sedang (36 pt / ~0.5 inch)</option>
+              <option value="54">Besar (54 pt / ~0.75 inch)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Halaman yang Dipotong:</label>
+            <input type="text" class="form-control" id="opt_crop_pages" value="all" placeholder="'all' atau '1-3, 5'">
+          </div>
+        `
+      },
+      edit: {
+        title: "Tambah Teks / Catatan ke PDF",
+        icon: "✏️",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF",
+        optionsHtml: `
+          <div class="form-group">
+            <label class="form-label">Isi Teks Tambahan:</label>
+            <textarea class="form-control" id="opt_edit_text" rows="3" placeholder="Tulis teks yang ingin ditambahkan..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Halaman Target:</label>
+            <input type="number" class="form-control" id="opt_edit_page" value="1" min="1">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ukuran Font:</label>
+            <input type="number" class="form-control" id="opt_edit_fs" value="12" min="8" max="48">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Warna Teks:</label>
+            <input type="color" id="opt_edit_color" value="#000000" style="height:35px; width:70px; border:none; cursor:pointer;">
+          </div>
+        `
+      },
+      organize: {
+        title: "Atur Ulang Urutan Halaman PDF",
+        icon: "🔀",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF",
+        optionsHtml: `
+          <div class="form-group">
+            <label class="form-label">Urutan Baru Halaman (Contoh: '3, 1, 2, 4' atau balik '5, 4, 3, 2, 1'):</label>
+            <input type="text" class="form-control" id="opt_org_order" placeholder="Contoh: 3, 1, 2, 4">
+          </div>
+        `
+      },
+      compare: {
+        title: "Bandingkan 2 Dokumen PDF",
+        icon: "🔍",
+        multiple: true,
+        accept: ".pdf",
+        dropText: "Pilih 2 File PDF untuk Dibandingkan",
+        dropSub: "File pertama = versi lama / asli, file kedua = versi baru / revisi.",
+        optionsHtml: `<div style="font-size:12px; color:#64748B;">Sistem akan menganalisis perbedaan teks per halaman dan menyusun laporan ringkasan perbandingan.</div>`
+      },
+      powerpoint2pdf: {
+        title: "PowerPoint ke PDF",
+        icon: "📊",
+        multiple: false,
+        accept: ".pptx,.ppt",
+        dropText: "Pilih File Presentasi PowerPoint (.pptx)",
+        optionsHtml: `<div style="font-size:12px; color:#64748B;">Presentasi PPTX akan dikonversi menjadi dokumen PDF beresolusi tinggi dengan slide teratur.</div>`
+      },
+      pdf2pptx: {
+        title: "PDF ke PowerPoint (.pptx)",
+        icon: "📽️",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF",
+        optionsHtml: `<div style="font-size:12px; color:#64748B;">Tiap halaman PDF akan dijadikan slide presentasi PPTX widescreen tajam.</div>`
+      },
+      pdf2word: {
+        title: "PDF ke Word (.docx)",
+        icon: "📝",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF untuk Diubah ke Word",
+        optionsHtml: `<div style="font-size:12px; color:#64748B;">Teks dan paragraf akan diekstrak ke dokumen Microsoft Word yang dapat diedit langsung.</div>`
+      },
+      word2pdf: {
+        title: "Word ke PDF",
+        icon: "📄",
+        multiple: false,
+        accept: ".docx,.doc",
+        dropText: "Pilih Dokumen Word (.docx)",
+        optionsHtml: `<div style="font-size:12px; color:#64748B;">Dokumen Word akan dikonversi menjadi file PDF terformat rapi.</div>`
+      },
+      pdf2excel: {
+        title: "PDF ke Excel (.xlsx)",
+        icon: "📊",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF yang Berisi Tabel",
+        optionsHtml: `<div style="font-size:12px; color:#64748B;">Tabel di dalam PDF akan dideteksi dan diekstrak menjadi spreadsheet Excel (.xlsx).</div>`
+      },
+      excel2pdf: {
+        title: "Excel ke PDF",
+        icon: "📈",
+        multiple: false,
+        accept: ".xlsx,.xls",
+        dropText: "Pilih File Excel (.xlsx)",
+        optionsHtml: `<div style="font-size:12px; color:#64748B;">Tabel Excel akan dicetak ke dalam dokumen PDF landscape yang rapi.</div>`
+      },
+      pdf2img: {
+        title: "PDF ke Gambar",
+        icon: "📸",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF",
+        optionsHtml: `
+          <div class="form-group">
+            <label class="form-label">Format Gambar:</label>
+            <select class="form-control" id="opt_img_fmt">
+              <option value="png" selected>PNG (Tajam / Transparansi)</option>
+              <option value="jpg">JPG (Ukuran Hemat)</option>
+              <option value="webp">WEBP (Modern Web)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Resolusi (DPI):</label>
+            <select class="form-control" id="opt_dpi">
+              <option value="150">150 DPI (Web & Layar)</option>
+              <option value="200" selected>200 DPI (Bagus - Rekomendasi)</option>
+              <option value="300">300 DPI (Kualitas Cetak Tajam)</option>
+            </select>
+          </div>
+        `
+      },
+      extract_images: {
+        title: "Ekstrak Semua Gambar Asli PDF",
+        icon: "🎨",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF untuk Ekstrak Gambar",
+        optionsHtml: `<div style="font-size:12px; color:#64748B;">Semua gambar murni (embedded image) di dalam dokumen akan diekstrak dengan resolusi penuh ke dalam file ZIP.</div>`
+      },
+      html2pdf: {
+        title: "HTML ke PDF",
+        icon: "🌐",
+        multiple: false,
+        accept: ".html,.htm",
+        dropText: "Pilih File Dokumen HTML",
+        optionsHtml: `<div style="font-size:12px; color:#64748B;">Markup HTML akan dirender menjadi halaman dokumen PDF standar A4.</div>`
+      },
+      pdf2pdfa: {
+        title: "PDF ke PDF/A (Format Standar Arsip)",
+        icon: "🏛️",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF untuk Diarsip",
+        optionsHtml: `<div style="font-size:12px; color:#64748B;">Dokumen akan distandarisasi ke format ISO PDF/A-1b dengan font embedding dan metadata lengkap untuk penyimpanan jangka panjang.</div>`
+      },
+      rotate: {
+        title: "Putar Halaman PDF",
+        icon: "🔄",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF untuk Diputar",
+        optionsHtml: `
+          <div class="form-group">
+            <label class="form-label">Derajat Putaran:</label>
+            <select class="form-control" id="opt_rotate_deg">
+              <option value="90">90° Searah Jarum Jam</option>
+              <option value="180">180° Putar Balik</option>
+              <option value="270">270° Berlawanan Jarum Jam</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Halaman yang Diputar:</label>
+            <input type="text" class="form-control" id="opt_rotate_pages" value="all" placeholder="'all' atau '1-3, 5'">
+          </div>
+        `
+      },
+      remove_pages: {
+        title: "Hapus Halaman Tertentu",
+        icon: "🗑️",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF",
+        optionsHtml: `
+          <div class="form-group">
+            <label class="form-label">Nomor Halaman yang Ingin Dihapus (Contoh: '2, 4-6'):</label>
+            <input type="text" class="form-control" id="opt_rem_pages" placeholder="2, 5">
+          </div>
+        `
+      },
+      watermark: {
+        title: "Tambah Watermark Teks",
+        icon: "💧",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF",
+        optionsHtml: `
+          <div class="form-group">
+            <label class="form-label">Teks Watermark:</label>
+            <input type="text" class="form-control" id="opt_wm_text" value="RAHASIA / CONFIDENTIAL">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Sudut Kemiringan (Derajat):</label>
+            <select class="form-control" id="opt_wm_angle">
+              <option value="45" selected>Diagonal (45°)</option>
+              <option value="0">Mendatar (0°)</option>
+              <option value="90">Tegak (90°)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Transparansi (Opacity):</label>
+            <select class="form-control" id="opt_wm_opac">
+              <option value="0.2">Sangat Halus (20%)</option>
+              <option value="0.35" selected>Sedang (35%)</option>
+              <option value="0.6">Tegas (60%)</option>
+            </select>
+          </div>
+        `
+      },
+      page_numbers: {
+        title: "Tambah Nomor Halaman",
+        icon: "🔢",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF",
+        optionsHtml: `
+          <div class="form-group">
+            <label class="form-label">Posisi Nomor:</label>
+            <select class="form-control" id="opt_pn_pos">
+              <option value="bottom-center" selected>Bawah Tengah</option>
+              <option value="bottom-right">Bawah Kanan</option>
+              <option value="top-center">Atas Tengah</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Format Penulisan:</label>
+            <input type="text" class="form-control" id="opt_pn_fmt" value="Halaman {n} dari {total}">
+          </div>
+        `
+      },
+      protect: {
+        title: "Kunci PDF dengan Password",
+        icon: "🔒",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF untuk Dikunci",
+        optionsHtml: `
+          <div class="form-group">
+            <label class="form-label">Masukkan Kata Sandi (Password):</label>
+            <input type="password" class="form-control" id="opt_prot_pw" placeholder="Ketik password aman...">
+          </div>
+        `
+      },
+      unlock: {
+        title: "Buka Proteksi PDF",
+        icon: "🔓",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF yang Terkunci",
+        optionsHtml: `
+          <div class="form-group">
+            <label class="form-label">Password PDF Saat Ini:</label>
+            <input type="password" class="form-control" id="opt_unl_pw" placeholder="Ketik password pembuka...">
+          </div>
+        `
+      },
+      pdf2text: {
+        title: "Ekstrak Teks PDF (.txt)",
+        icon: "📋",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF",
+        optionsHtml: `<div style="font-size:12px; color:#64748B;">Seluruh isi teks akan disalin dan disimpan sebagai dokumen teks polos (.txt).</div>`
+      },
+      repair: {
+        title: "Perbaiki PDF Rusak",
+        icon: "🛠️",
+        multiple: false,
+        accept: ".pdf",
+        dropText: "Pilih File PDF yang Rusak / Error",
+        optionsHtml: `<div style="font-size:12px; color:#64748B;">Engine MuPDF akan merekonstruksi ulang tabel referensi silang dan aliran data yang korup.</div>`
+      }
+    };
+
+    let currentTool = null;
+    let selectedFiles = [];
+    let isDrawing = false;
+    let sigCanvas = null;
+    let sigCtx = null;
+
+    function filterCategory(cat, btn) {
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const cards = document.querySelectorAll('.tool-card');
+      cards.forEach(card => {
+        if (cat === 'all' || card.getAttribute('data-cat') === cat) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function searchTools(query) {
+      const q = query.toLowerCase().trim();
+      const cards = document.querySelectorAll('.tool-card');
+      cards.forEach(card => {
+        const title = card.querySelector('.tool-title').innerText.toLowerCase();
+        const desc = card.querySelector('.tool-desc').innerText.toLowerCase();
+        if (title.includes(q) || desc.includes(q)) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function openTool(toolKey) {
+      currentTool = toolKey;
+      selectedFiles = [];
+      const cfg = TOOLS_CONFIG[toolKey];
+      if (!cfg) return;
+
+      document.getElementById('mTitle').innerText = cfg.title;
+      document.getElementById('mIcon').innerText = cfg.icon;
+      document.getElementById('dropText').innerText = cfg.dropText;
+      document.getElementById('dropSub').innerText = cfg.dropSub || "Klik atau seret file Anda ke kotak ini";
+
+      const fileInput = document.getElementById('fileInput');
+      fileInput.value = "";
+      fileInput.accept = cfg.accept || "*/*";
+      fileInput.multiple = !!cfg.multiple;
+
+      const optBox = document.getElementById('optionsBox');
+      const dynOpt = document.getElementById('dynamicOptions');
+      if (cfg.optionsHtml) {
+        dynOpt.innerHTML = cfg.optionsHtml;
+        optBox.style.display = 'block';
+
+        if (toolKey === 'sign') {
+          setTimeout(initSignatureCanvas, 100);
+        }
+      } else {
+        optBox.style.display = 'none';
+      }
+
+      resetModalState();
+      document.getElementById('modalOverlay').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('active');
+      selectedFiles = [];
+    }
+
+    function resetModalState() {
+      document.getElementById('stepUpload').style.display = 'block';
+      document.getElementById('stepLoading').style.display = 'none';
+      document.getElementById('stepResult').style.display = 'none';
+      document.getElementById('modalFooter').style.display = 'flex';
+      document.getElementById('btnProcess').disabled = true;
+      renderFileList();
+    }
+
+    function resetModal() {
+      resetModalState();
+    }
+
+    function handleFileSelect(files) {
+      if (!files || files.length === 0) return;
+      const cfg = TOOLS_CONFIG[currentTool];
+
+      if (cfg.multiple) {
+        for (let i = 0; i < files.length; i++) {
+          selectedFiles.push(files[i]);
+        }
+      } else {
+        selectedFiles = [files[0]];
+      }
+
+      renderFileList();
+    }
+
+    function renderFileList() {
+      const listBox = document.getElementById('fileListBox');
+      listBox.innerHTML = "";
+
+      if (selectedFiles.length === 0) {
+        listBox.style.display = 'none';
+        document.getElementById('btnProcess').disabled = true;
+        return;
+      }
+
+      listBox.style.display = 'flex';
+      document.getElementById('btnProcess').disabled = false;
+
+      selectedFiles.forEach((f, idx) => {
+        const item = document.createElement('div');
+        item.className = 'file-item';
+
+        const nameSpan = document.createElement('span');
+        nameSpan.className = 'file-item-name';
+        nameSpan.innerText = `${idx + 1}. ${f.name} (${(f.size / 1024).toFixed(1)} KB)`;
+
+        const actDiv = document.createElement('div');
+        actDiv.className = 'file-item-actions';
+
+        if (TOOLS_CONFIG[currentTool].multiple && selectedFiles.length > 1) {
+          if (idx > 0) {
+            const upBtn = document.createElement('button');
+            upBtn.className = 'item-btn';
+            upBtn.innerText = '⬆️';
+            upBtn.onclick = (e) => { e.stopPropagation(); moveFile(idx, -1); };
+            actDiv.appendChild(upBtn);
+          }
+          if (idx < selectedFiles.length - 1) {
+            const dnBtn = document.createElement('button');
+            dnBtn.className = 'item-btn';
+            dnBtn.innerText = '⬇️';
+            dnBtn.onclick = (e) => { e.stopPropagation(); moveFile(idx, 1); };
+            actDiv.appendChild(dnBtn);
+          }
+        }
+
+        const delBtn = document.createElement('button');
+        delBtn.className = 'item-btn btn-del';
+        delBtn.innerText = '✕';
+        delBtn.onclick = (e) => { e.stopPropagation(); removeFile(idx); };
+        actDiv.appendChild(delBtn);
+
+        item.appendChild(nameSpan);
+        item.appendChild(actDiv);
+        listBox.appendChild(item);
+      });
+    }
+
+    function moveFile(idx, direction) {
+      const targetIdx = idx + direction;
+      if (targetIdx < 0 || targetIdx >= selectedFiles.length) return;
+      const tmp = selectedFiles[idx];
+      selectedFiles[idx] = selectedFiles[targetIdx];
+      selectedFiles[targetIdx] = tmp;
+      renderFileList();
+    }
+
+    function removeFile(idx) {
+      selectedFiles.splice(idx, 1);
+      renderFileList();
+    }
+
+    // Signature Canvas Logic
+    function initSignatureCanvas() {
+      sigCanvas = document.getElementById('sigCanvas');
+      if (!sigCanvas) return;
+      sigCanvas.width = sigCanvas.offsetWidth;
+      sigCanvas.height = 130;
+      sigCtx = sigCanvas.getContext('2d');
+      sigCtx.lineWidth = 2.5;
+      sigCtx.lineCap = 'round';
+      sigCtx.lineJoin = 'round';
+      sigCtx.strokeStyle = '#0F172A';
+
+      function getPos(e) {
+        const rect = sigCanvas.getBoundingClientRect();
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        return { x: clientX - rect.left, y: clientY - rect.top };
+      }
+
+      function startDraw(e) {
+        e.preventDefault();
+        isDrawing = true;
+        const pos = getPos(e);
+        sigCtx.beginPath();
+        sigCtx.moveTo(pos.x, pos.y);
+      }
+
+      function draw(e) {
+        if (!isDrawing) return;
+        e.preventDefault();
+        const pos = getPos(e);
+        sigCtx.lineTo(pos.x, pos.y);
+        sigCtx.stroke();
+      }
+
+      function stopDraw() {
+        isDrawing = false;
+      }
+
+      sigCanvas.addEventListener('mousedown', startDraw);
+      sigCanvas.addEventListener('mousemove', draw);
+      sigCanvas.addEventListener('mouseup', stopDraw);
+      sigCanvas.addEventListener('touchstart', startDraw);
+      sigCanvas.addEventListener('touchmove', draw);
+      sigCanvas.addEventListener('touchend', stopDraw);
+    }
+
+    function clearSignatureCanvas() {
+      if (sigCanvas && sigCtx) {
+        sigCtx.clearRect(0, 0, sigCanvas.width, sigCanvas.height);
+      }
+    }
+
+    // Drag and Drop Event Listeners
+    const dropZone = document.getElementById('dropZone');
+    ['dragenter', 'dragover'].forEach(name => {
+      dropZone.addEventListener(name, (e) => { e.preventDefault(); dropZone.classList.add('dragover'); }, false);
+    });
+    ['dragleave', 'drop'].forEach(name => {
+      dropZone.addEventListener(name, (e) => { e.preventDefault(); dropZone.classList.remove('dragover'); }, false);
+    });
+    dropZone.addEventListener('drop', (e) => {
+      const dt = e.dataTransfer;
+      if (dt && dt.files && dt.files.length) {
+        handleFileSelect(dt.files);
+      }
+    });
+
+    // Submit Process
+    function submitProcess() {
+      if (!currentTool || selectedFiles.length === 0) return;
+
+      document.getElementById('stepUpload').style.display = 'none';
+      document.getElementById('modalFooter').style.display = 'none';
+      document.getElementById('stepLoading').style.display = 'block';
+
+      const formData = new FormData();
+      selectedFiles.forEach(f => formData.append('files', f));
+
+      if (currentTool === 'img2pdf') {
+        formData.append('page_size', document.getElementById('opt_page_size').value);
+        formData.append('margin', document.getElementById('opt_margin').value);
+        formData.append('auto_rotate', document.getElementById('opt_autorotate').checked);
+      } else if (currentTool === 'split') {
+        const mode = document.getElementById('opt_split_mode').value;
+        formData.append('mode', mode);
+        if (mode === 'ranges') {
+          formData.append('ranges', document.getElementById('opt_split_ranges').value);
+        }
+      } else if (currentTool === 'sign') {
+        let sigData = "";
+        if (sigCanvas) {
+          sigData = sigCanvas.toDataURL('image/png');
+        }
+        formData.append('signature_data', sigData);
+        formData.append('page_num', document.getElementById('opt_sig_page').value);
+        formData.append('position', document.getElementById('opt_sig_pos').value);
+        formData.append('signer_name', document.getElementById('opt_sig_name').value);
+      } else if (currentTool === 'compress') {
+        const checked = document.querySelector('input[name="comp_lvl"]:checked');
+        formData.append('level', checked ? checked.value : 'recommended');
+      } else if (currentTool === 'redact') {
+        formData.append('keywords', document.getElementById('opt_redact_kws').value);
+        formData.append('label', document.getElementById('opt_redact_label').value);
+      } else if (currentTool === 'crop') {
+        formData.append('margin', document.getElementById('opt_crop_margin').value);
+        formData.append('pages', document.getElementById('opt_crop_pages').value);
+      } else if (currentTool === 'edit') {
+        formData.append('text', document.getElementById('opt_edit_text').value);
+        formData.append('page_num', document.getElementById('opt_edit_page').value);
+        formData.append('font_size', document.getElementById('opt_edit_fs').value);
+        formData.append('color', document.getElementById('opt_edit_color').value);
+      } else if (currentTool === 'organize') {
+        formData.append('order', document.getElementById('opt_org_order').value);
+      } else if (currentTool === 'pdf2img') {
+        formData.append('format', document.getElementById('opt_img_fmt').value);
+        formData.append('dpi', document.getElementById('opt_dpi').value);
+      } else if (currentTool === 'rotate') {
+        formData.append('degrees', document.getElementById('opt_rotate_deg').value);
+        formData.append('pages', document.getElementById('opt_rotate_pages').value);
+      } else if (currentTool === 'remove_pages') {
+        formData.append('pages', document.getElementById('opt_rem_pages').value);
+      } else if (currentTool === 'watermark') {
+        formData.append('text', document.getElementById('opt_wm_text').value);
+        formData.append('angle', document.getElementById('opt_wm_angle').value);
+        formData.append('opacity', document.getElementById('opt_wm_opac').value);
+      } else if (currentTool === 'page_numbers') {
+        formData.append('position', document.getElementById('opt_pn_pos').value);
+        formData.append('format', document.getElementById('opt_pn_fmt').value);
+      } else if (currentTool === 'protect') {
+        formData.append('password', document.getElementById('opt_prot_pw').value);
+      } else if (currentTool === 'unlock') {
+        formData.append('password', document.getElementById('opt_unl_pw').value);
+      }
+
+      fetch(`/api/process/${currentTool}`, {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('stepLoading').style.display = 'none';
+
+        if (data.status === 'ok') {
+          document.getElementById('stepResult').style.display = 'block';
+          document.getElementById('resTitle').innerText = 'Berhasil Diproses!';
+          document.getElementById('resDetail').innerText = data.detail || `File siap: ${data.filename}`;
+          const dBtn = document.getElementById('resBtnDownload');
+          dBtn.href = data.download_url;
+          dBtn.setAttribute('download', data.filename);
+        } else {
+          alert('Terjadi kesalahan: ' + (data.message || 'Gagal memproses file.'));
+          resetModalState();
+        }
+      })
+      .catch(err => {
+        document.getElementById('stepLoading').style.display = 'none';
+        alert('Gagal menghubungi server lokal: ' + err);
+        resetModalState();
+      });
+    }
+  </script>
+</body>
+</html>
